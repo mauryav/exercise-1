@@ -7,39 +7,57 @@ package exercise1;
  *
  * @author dancye
  * @author Paul Bonenfant Jan 25, 2022 
+ * @author Vikas Maurya jan 27, 2023
  */
+
+import java.util.Scanner;
 public class CardTrick {
     
     public static void main(String[] args) {
-        
+         
         Card[] hand = new Card[7];
 
-        for (int i = 0; i < hand.length; i++) {
+        for (int i = 0; i <= hand.length-1; i++) 
+        {
             Card card = new Card();
-            //card.setValue(insert call to random number generator here)
-            // 
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
-            // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
-            //       Don't worry about duplicates at this point
+            card.setValue((int)(Math.random() * 13) + 1);
+            card.setSuit(Card.SUITS[(int)(Math.random()* 4)]);
+            hand[i] = card;
         }
-
-        // insert code to ask the user for Card value and suit, create their card
-        // and search the hand here. 
-        // Hint: You can ask for values 1 to 10, and then
-        //       11 for jack, 12 for queen, etc. (remember arrays are 0-based though)
-        //       1 for Hearts, 2 for Diamonds, etc. (remember arrays are 0-based though)
-        // 
-        // Then loop through the cards in the array to see if there's a match.
         
-        // If the guess is successful, invoke the printInfo() method below.
+        System.out.println("Enter the  number and card type ");
+        Scanner keyboard = new Scanner(System.in);
+        int num = keyboard.nextInt();
+        String suit = keyboard.next();
+        boolean win = false;
+        for (int j = 0; j <= hand.length-1; j++) 
+        {
+           if( hand[j].getSuit().equalsIgnoreCase(suit) && hand[j].getValue() == (num))
+           {
+               win = true;
+           }
+        }
         
-    }
-
-    /**
+        if(win == true)
+        {
+            printInfo();
+        } 
+        else if(win == false)
+        {
+            System.out.println("Wrong Card!! You LOST ");
+            System.out.println("All the winning Cards: ");
+            for (int k = 0; k <= hand.length-1; k++) 
+            {
+                System.out.println(hand[k].getValue() + " " + hand[k].getSuit() );
+            }
+        }      
+    }   
+     /**
      * A simple method to print out personal information. Follow the instructions to 
      * replace this information with your own.
      * @author Paul Bonenfant Jan 2022
      */
+ 
     private static void printInfo() {
     
         System.out.println("Congratulations, you guessed right!");
@@ -63,5 +81,6 @@ public class CardTrick {
         
     
     }
-
 }
+
+
